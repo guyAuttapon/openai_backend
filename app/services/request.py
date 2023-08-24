@@ -1,10 +1,9 @@
-import logging
-import requests as req
 
-logger = logging.getLogger(__name__)
+import requests as req
+from ..core import log
 
 def get(**kwargs):
-    logger.info(f"{kwargs['url']}")
+    log.info(f"{kwargs['url']}")
     try:
         url = kwargs['url']
         response = req.get(
@@ -12,7 +11,7 @@ def get(**kwargs):
             headers=kwargs.get("headers", None), 
             params=kwargs.get("params", None)
         )
-        logger.info(f"{response}")
+        log.info(f"{response}")
         response.raise_for_status()
         result = response.json()
     except req.exceptions.RequestException as e:
@@ -22,17 +21,36 @@ def get(**kwargs):
     return result
 
 def post(**kwargs):
-    logger.info(f"{kwargs['url']}")
+    log.info(f"{kwargs['url']}")
     try:
         url = kwargs['url']
-        response = req.get(
+        response = req.post(
             url, 
             headers=kwargs.get("headers", None), 
             params=kwargs.get("params", None),
+            json=kwargs.get("json", None),
             data=kwargs.get("data", None),
             files=kwargs.get("files", None),
         )
-        logger.info(f"{response}")
+        log.info(f"{response.json()}")
+        response.raise_for_status()
+        result = response.json()
+    except req.exceptions.RequestException as e:
+        raise e
+    except Exception as e:
+        raise e
+    return result
+
+def delete(**kwargs):
+    log.info(f"{kwargs['url']}")
+    try:
+        url = kwargs['url']
+        response = req.delete(
+            url, 
+            headers=kwargs.get("headers", None), 
+            params=kwargs.get("params", None)
+        )
+        log.info(f"{response}")
         response.raise_for_status()
         result = response.json()
     except req.exceptions.RequestException as e:

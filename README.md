@@ -64,10 +64,7 @@ please make sure your already **. awsume**
 **also please run those command before push code**
 
 ```bash
-./go lint
-./go test
-./go dependencyCheck
-./go securityScan
+./guy startserver
 ```
 
 **fix docker sls can't mount**

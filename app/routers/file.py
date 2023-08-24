@@ -14,9 +14,18 @@ async def get_files():
         raise HTTPException(status_code=400, detail="Bad Request")
     return response
 
+@router.delete("/{item_id}", tags=["files"])
+async def delete_files(item_id: str):
+    try:
+        url = openai.FILE_URL + f"/{item_id}"
+        response = request.delete(url=url, headers=openai.DEFAULT_HEADER)
+    except Exception:
+        raise HTTPException(status_code=400, detail="Bad Request")
+    return response
 
 @router.post("/uploadfiles/", tags=["files"])
 async def create_upload_files(file: UploadFile):
+    file_content = await file.read()
     try:
         response = request.post(
             url=openai.FILE_URL, 
@@ -25,22 +34,9 @@ async def create_upload_files(file: UploadFile):
                 "purpose": "fine-tune"
             },
             files = {
-                "file": file.file.read
+                "file": file_content.decode('utf-8')
             }
         )
     except Exception:
         raise HTTPException(status_code=400, detail="Bad Request")
     return response
-
-
-@router.get("/upload", tags=["files"])
-async def upload():
-    content = """
-<body>
-<form action="/files/uploadfiles/" enctype="multipart/form-data" method="post">
-<input name="files" type="file" multiple>
-<input type="submit">
-</form>
-</body>
-    """
-    return HTMLResponse(content=content)
