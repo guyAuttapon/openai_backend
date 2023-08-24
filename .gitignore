@@ -27,6 +27,7 @@ htmlcov
 safety-report.txt
 bandit-report.html
 .scannerwork
+*.env
 
 # Serverless directories
 .serverless

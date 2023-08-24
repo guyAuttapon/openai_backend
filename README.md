@@ -1,6 +1,6 @@
-## Bff is Lambda
+## FastAPI is fun
 
-lambda is fun
+FastAPI is fun
 
 ## Installation
 
@@ -8,16 +8,11 @@ Use the [brew](https://formulae.brew.sh/) install python and nodejs
 
 ```bash
 brew install python@3.8
-brew install node@14
-
-then
-
-npm install -g
 ```
 
-also you can using **pyenv** and **nodenv** but version should be same as brew 
+also you can using **pyenv** but version should be same as brew 
 
-**Support** python version 3.8.11, node version 14.17.0
+**Support** python version 3.8.11
 
 **Start develope with**
 
@@ -31,60 +26,14 @@ please using >> [virtualenv](https://realpython.com/python-virtual-environments-
 5. deactivate #when develope finish
 ```
 
-## Usage
-
-after finish develop please visit **serverless.yml**
-
-```yml
-functions:
-  getHighlight:
-    name: name_of_function
-    handler: app/path/to/handler.app # set to handler
-    memorySize: 128
-    layers:
-      - Ref: PythonRequirementsLambdaLayer # ref to dependencies layer
-    package:
-      patterns:
-        - 'app/path/**' # include path
-        - '!app/path/tests' # ignore tests path
-    events:
-      - http:
-          path: urlPath
-          method: get # http method
-```
-
 **You can Start Local Server with**
 
 ```bash
-./go startLocalServer
-```
-
-please make sure your already **. awsume**
-
-**also please run those command before push code**
-
-```bash
-./guy startserver
-```
-
-**fix docker sls can't mount**
-
-```bash
-$ cat ~/Library/Group\ Containers/group.com.docker/settings.json  
-{
-  "filesharingDirectories" : [
-    "\/Users",
-    "\/Volumes",
-    "\/private",
-    "\/tmp",
-    "\/var\/tmp",
-    "\/private\/var\/tmp",
-    "\/root\/.cache"
-  ],
+./force startserver
 ```
 
 ## Contributing
-Everyone under Superapp Team
+Everyone
 
 ## License
 [WTFPL](http://www.wtfpl.net/)
